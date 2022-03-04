@@ -1,0 +1,28 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug app(Local)",
+      "type": "node",
+      "request": "launch",
+      "args": ["src/main.ts"],
+      "runtimeArgs": [
+        "-r",
+        "ts-node/register",
+        "-r",
+        "tsconfig-paths/register",
+        "--trace-uncaught"
+      ],
+      "cwd": "${workspaceRoot}",
+      "protocol": "inspector",
+      "internalConsoleOptions": "openOnSessionStart",
+      "env": {
+        "APP_ENV": "development",
+        "PORT": "80"
+      },
+      "sourceMaps": true,
+      "console": "internalConsole",
+      "outputCapture": "std"
+    }
+  ]
+}
