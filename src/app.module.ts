@@ -9,6 +9,8 @@ import { CacheManagerModule } from './modules/cache-manager/cache-manager.module
 import { EventManagerModule } from './modules/event-manager/event-manager.module';
 import { ThrottlerModule } from '@nestjs/throttler';
 import { ThrottlerStorageRedisService } from 'nestjs-throttler-storage-redis';
+import { GraphQLModule } from '@nestjs/graphql';
+import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 
 @Module({
   imports: [
@@ -43,6 +45,17 @@ import { ThrottlerStorageRedisService } from 'nestjs-throttler-storage-redis';
         host: process.env.REDIS_HOST,
         port: Number(process.env.REDIS_PORT),
         password: process.env.REDIS_AUTH,
+      },
+    }),
+    GraphQLModule.forRoot<ApolloDriverConfig>({
+      driver: ApolloDriver,
+      installSubscriptionHandlers: true,
+      autoSchemaFile: 'schema.gql',
+      playground: true,
+      cors: {
+        maxAge: 86400,
+        origin: true,
+        preflightContinue: false,
       },
     }),
   ],

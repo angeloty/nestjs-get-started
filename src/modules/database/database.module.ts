@@ -7,7 +7,10 @@ import { Repository } from 'typeorm';
 @Global()
 export class DatabaseModule {
   static forRoot(opt: TypeOrmModuleOptions): DynamicModule {
-    const dbModule = TypeOrmModule.forRoot(opt as TypeOrmModuleOptions);
+    const dbModule = TypeOrmModule.forRoot({
+      ...opt,
+      synchronize: true,
+    });
     return {
       global: true,
       module: DatabaseModule,
